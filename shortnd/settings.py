@@ -23,7 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'aloe_django',
     'rest_framework',
-    'shorturls'
+    'shortnd.shorturls'
 ]
 
 MIDDLEWARE = [
