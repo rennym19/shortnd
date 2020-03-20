@@ -1,7 +1,7 @@
 import os
 import environ
 
-root = environ.Path(__file__) - 2
+root = environ.Path(__file__) - 1
 env = environ.Env()
 environ.Env.read_env()
 
