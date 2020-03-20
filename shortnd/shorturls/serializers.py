@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from ..models import URL
-from ..key_generator import gen_key
+from .models import URL
+from .key_generator import gen_key
 
 class URLSerializer(serializers.ModelSerializer):
     class Meta:
