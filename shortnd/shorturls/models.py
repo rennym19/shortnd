@@ -1,3 +1,10 @@
 from django.db import models
 
-# Create your models here.
+
+class VisitsManager(models.Manager):
+    def get_queryset(self):
+        pass
+
+
+class URL(models.Model):
+    pass
