@@ -2,7 +2,9 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 from ..models import URL
+from ..serializers import URLSerializer
 from ..key_generator import gen_key
+
 
 class VisitsTests(APITestCase):
     def setUp(self):
@@ -24,8 +26,8 @@ class VisitsTests(APITestCase):
         
     def test_top_hundred(self):
         response = self.client.get(self.top_hundred_url)
+        serialized_data = URLSerializer(response.data, many=True).data
+        
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        print(response.data)
         self.assertEqual(len(response.data), 2)
-        self.assertEqual(response.data[0].key, self.second_url.key)
-        self.assertEqual(response.data[1].key, self.url.key)
+        self.assertEqual(serialized_data[0]['id'], self.second_url.pk)
