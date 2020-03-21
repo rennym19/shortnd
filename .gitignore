@@ -4,6 +4,9 @@ env/
 # Environ variables
 shortnd/.env
 
+# npm
+frontend/node_modules/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
