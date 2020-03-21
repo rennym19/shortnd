@@ -9,6 +9,7 @@ from ..key_generator import gen_key
 class VisitsTests(APITestCase):
     def setUp(self):
         self.client = APIClient()
+        self.visit_view_name = 'shortnd:redirect'
         self.top_hundred_url = reverse('shortnd:top_hundred')
 
         url = URL(original_url='https://www.apple.com', title='Apple', key=gen_key(url_id=1), visit_count=50)
@@ -20,9 +21,11 @@ class VisitsTests(APITestCase):
         self.second_url = second_url
 
     def test_visit_count_increments(self):
-        response = self.client.get(self.url.short_url)
+        response = self.client.get(reverse(self.visit_view_name, kwargs={'key': self.url.key}))
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
-        self.assertEqual(self.url.visit_count, 81)
+
+        url = URL.objects.get(original_url='https://www.apple.com')
+        self.assertEqual(url.visit_count, 51)
         
     def test_top_hundred(self):
         response = self.client.get(self.top_hundred_url)

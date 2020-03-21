@@ -8,7 +8,7 @@ from . import set_up, empty_table, check_response_data, create_urls
 
 @step('I Click on a shortened url with key "([^"]+)"')
 def redirect_to(self, key):
-    world.client.get(reverse('shortnd:redirect', args=(key)))
+    world.response = world.client.get(reverse('shortnd:redirect', kwargs={'key': key}))
 
 
 @step('I get redirected to an URL')

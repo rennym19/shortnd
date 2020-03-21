@@ -8,3 +8,8 @@ from . import set_up, empty_table, check_response_data, create_urls
 @step('I send a GET request to the endpoint /top_hundred/')
 def send_shorten_post_request(self):
     world.response = world.client.get(reverse('shortnd:top_hundred'))
+
+
+@step('I check the number of urls')
+def send_shorten_post_request(self):
+    assert_true(len(world.response.data), 3)

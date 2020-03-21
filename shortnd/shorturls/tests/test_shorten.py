@@ -11,7 +11,7 @@ class ShortenTests(TestCase):
 
     def test_shorten_invalid_url(self):
         invalid_data = {'url': 'dasdas'}
-        response = self.client.post(self.url, invalid_data)
+        response = self.client.post(self.url, invalid_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(URL.objects.count(), 0)
         self.assertEqual(response.data, {
@@ -19,7 +19,7 @@ class ShortenTests(TestCase):
         })
     
     def test_shorten_no_url(self):
-        response = self.client.post(self.url, {})
+        response = self.client.post(self.url, {}, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(URL.objects.count(), 0)
         self.assertEqual(response.data, {
@@ -28,26 +28,25 @@ class ShortenTests(TestCase):
     
     def test_shorten_url(self):
         data = {'url': 'https://www.google.com'}
-        response = self.client.post(self.url, data)
+        response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         url = URL.objects.get()
         self.assertEqual(response.data, {
             'id': url.pk, 
             'original_url': url.original_url, 
-            'key': url.key, 
-            'title': url.title,
+            'key': url.key,
             'short_url': url.short_url,
             'visit_count': url.visit_count
         })
 
     def test_shorten_already_shortened_url(self):
         data = {'url': 'https://www.amazon.com/'}
-        response = self.client.post(self.url, data)
+        response = self.client.post(self.url, data, format='json')
         url = URL.objects.order_by('-id').first()
         num_urls = URL.objects.count()
 
-        new_response = self.client.post(self.url, data)
+        new_response = self.client.post(self.url, data, format='json')
         new_url = URL.objects.order_by('-id').first()
         new_num_urls = URL.objects.count()
 
