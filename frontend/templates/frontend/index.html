@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shortnd!</title>
+  {% load static %}
+  <link rel="stylesheet" type=“text/css“ href="{% static "frontend/index.css" %}" >
 </head>
 <body>
 <div id="app">
     <!-- React will load here -->
 </div>
 </body>
-{% load static %}
 <script src="{% static "frontend/main.js" %}"></script>
 </html>

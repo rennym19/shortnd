@@ -5,4 +5,33 @@ html, body {
   background-color: #0747A6;
   color: white;
   font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.App {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas: "header" "main" "top-hundred" "footer";
+  grid-row-gap: 1em;
+}
+
+.Header {
+  grid-area: header;
+}
+
+.Main {
+  grid-area: main;
+}
+
+.Top-Hundred {
+  grid-area: top-hundred;
+}
+
+.Footer {
+  grid-area: footer;
 }

@@ -1,0 +1,43 @@
+.URL {
+  display: grid;
+  grid-template-areas: "input" 
+                       "result";
+}
+
+.URLInput {
+  grid-area: input;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.URLInput input {
+  background-color: white;
+  color: #172B4D;
+  border: 1px solid white;
+  border-radius: 16px;
+  padding: 12px;
+  margin: 0 8px
+}
+
+.URLInput .Input {
+  font-weight: 400;
+}
+
+.SubmitButton {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #47a607;
+  color: white;
+}
+
+.ShortenedUrl {
+  grid-area: result;
+  display: grid;
+  grid-row-gap: 1em;
+  padding: 12px;
+  margin: 1em auto;
+  background-color: white;
+  color: #172B4D;
+  border-radius: 16px;
+}
