@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.sites.models import Site
-
+from .title_crawler import fetch_title 
 
 class VisitsManager(models.Manager):
     def get_queryset(self):
@@ -10,13 +9,13 @@ class VisitsManager(models.Manager):
 class URL(models.Model):
     original_url = models.TextField()
     key = models.CharField(max_length=7, null=True, unique=True)
+    short_url = models.CharField(max_length=64, null=True)
     title = models.CharField(max_length=255, null=True)
     visit_count = models.IntegerField(null=True, default=0)
 
     objects = models.Manager()
     top_hundred = VisitsManager()
 
-    @property
-    def short_url(self):
-        domain = Site.objects.get_current().domain
-        return 'http://{0}/{1}/'.format(domain, self.key)
+    def fetch_title_if_not_set(self):
+        if self.title is None or self.title == '':
+            fetch_title(self)
