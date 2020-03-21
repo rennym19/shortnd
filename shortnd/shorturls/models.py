@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.sites.models import Site
 
-from .title_crawler import TitleCrawler
-
 
 class VisitsManager(models.Manager):
     def get_queryset(self):
@@ -10,7 +8,7 @@ class VisitsManager(models.Manager):
 
 
 class URL(models.Model):
-    original_url = models.TextField(max_length=2048, unique=True)
+    original_url = models.TextField()
     key = models.CharField(max_length=7, null=True, unique=True)
     title = models.CharField(max_length=255, null=True)
     visit_count = models.IntegerField(null=True, default=0)
@@ -22,11 +20,3 @@ class URL(models.Model):
     def short_url(self):
         domain = Site.objects.get_current().domain
         return 'http://{0}/{1}/'.format(domain, self.key)
-
-    def fetch_title(self):
-        if self.original_url:        
-            try:
-                crawler = TitleCrawler(self)
-                crawler.crawl_title()
-            except Exception:
-                print("Try later")
