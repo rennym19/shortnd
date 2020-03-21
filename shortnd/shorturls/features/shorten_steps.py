@@ -14,13 +14,18 @@ def set_url_request_body(self, url):
 def send_shorten_post_request(self):
     world.response = world.client.post(reverse('shortnd:shorten'), world.request_body, format='json')
 
-
-@step('I Send a POST request to the endpoint /shorten/ with no body')
+@step('I Send a POST request to the endpoint /shorten/ with no url')
 def send_empty_shorten_post_request(self):
-    world.response = world.client.post(reverse('shortnd:shorten'), {}, format='json')
+    world.response = world.client.post(reverse('shortnd:shorten'), {'not-url': 'url'}, format='json')
     print(world.response.data)
 
 @step('I receive a shortened URL')
 def receive_shortened_url(self):
-	received_short_url = True if 'short_url' in world.response.data else False
-	assert_true(received_short_url, True)
+    received_short_url = True if 'short_url' in world.response.data else False
+    assert_true(received_short_url, True)
+    world.short_url = world.response.data['short_url']
+
+@step('I receive the same shortened URL')
+def receive_the_same_short_url(self):
+    are_equal = world.response.data['short_url'] == world.short_url
+    assert_true(are_equal, True)

@@ -29,8 +29,8 @@ class VisitsTests(APITestCase):
         
     def test_top_hundred(self):
         response = self.client.get(self.top_hundred_url)
-        serialized_data = URLSerializer(response.data, many=True).data
+        serialized_data = URLSerializer(response.data['results'], many=True).data
         
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
+        self.assertEqual(len(response.data['results']), 2)
         self.assertEqual(serialized_data[0]['id'], self.second_url.pk)

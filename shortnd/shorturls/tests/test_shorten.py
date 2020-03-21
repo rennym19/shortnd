@@ -32,13 +32,8 @@ class ShortenTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         url = URL.objects.get()
-        self.assertEqual(response.data, {
-            'id': url.pk, 
-            'original_url': url.original_url, 
-            'key': url.key,
-            'short_url': url.short_url,
-            'visit_count': url.visit_count
-        })
+        self.assertEqual(response.data['short_url'], url.short_url)
+        self.assertEqual(response.data['original_url'], url.original_url)
 
     def test_shorten_already_shortened_url(self):
         data = {'url': 'https://www.amazon.com/'}
