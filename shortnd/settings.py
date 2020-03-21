@@ -8,7 +8,7 @@ environ.Env.read_env()
 SITE_ROOT = root()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -77,7 +77,7 @@ MEDIA_URL = env.str('MEDIA_URL', default='media/')
 STATIC_ROOT = public_root('static')
 STATIC_URL = env.str('STATIC_URL', default='static/')
 
-SECRET_KEY = env.str('SECRET_KEY')
+SECRET_KEY = '*em*4a7hjj$2s67u)#7f_f$9zi@fqyeb=*bw+c1x28+j9j%k^a'
 SITE_ID = 1
 
 REST_FRAMEWORK = {
