@@ -2,13 +2,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from django.views import View
 from django.views.generic import TemplateView
 from django.views.decorators.cache import never_cache
-from django.shortcuts import HttpResponse, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
 from django.db.models import ObjectDoesNotExist
 
-from .title_crawler import fetch_title
+from .pagination import BasicPagination, PaginationHandlerMixin, paginate_serializer
 from .serializers import URLSerializer
 from .models import URL
 
@@ -58,8 +57,10 @@ class Redirect(APIView):
         return Response({'error': 'URL Not Found'}, status=status.HTTP_404_NOT_FOUND)
 
 
-class TopHundred(APIView):
+class TopHundred(APIView, PaginationHandlerMixin):
+    pagination_class = BasicPagination
+
     def get(self, request):
         urls = URL.top_hundred.all()
-        serializer = URLSerializer(urls, many=True)
+        serializer = paginate_serializer(self, URLSerializer, urls)
         return Response(serializer.data, status=status.HTTP_200_OK)
