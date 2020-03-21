@@ -6,7 +6,7 @@ class URLSerializer(serializers.ModelSerializer):
     class Meta:
         model = URL
         fields = ['id', 'original_url', 'key', 'short_url', 'title', 'visit_count']
-        read_only_fields = ['id', 'visit_count', 'short_url', 'key']
+        read_only_fields = ['id', 'visit_count', 'short_url', 'title', 'key']
 
     def validate_original_url(self, val):
         return val
