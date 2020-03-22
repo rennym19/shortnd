@@ -73,3 +73,6 @@ An URL Shortener API built with Python and Django
   2. Convert the base 10 ID number to a base 62 string using our **base conversion algorithm**.
   3. Update the URL by setting its key/short_code to be equal to our newly generated key.
   4. When user clicks the shortened URL (domain + key) we get the URL that corresponds to that key an retrieve its original url. Then, redirect the user.
+
+#### DISCLAIMER
+  This is not by any means the best, most scalable way to generate a short code for an URL, for multiple reasons. However, for the sake of simplicity and because it ensures keys are unique, it's worth giving it a shot for small apps like this one.
