@@ -32,10 +32,10 @@ An URL Shortener API built with Python and Django
   ```
 
 ## Setting up the Client (React app)
-- Go to the frontend root and initialize the project
+- Go to the frontend root and install npm dependencies
   ```
   cd frontend
-  npm init
+  npm install
   ```
 
 ## Running
