@@ -1,6 +1,9 @@
 # shortnd
 An URL Shortener API built with Python and Django
 
+### Try here:
+https://shortnd-app.herokuapp.com/
+
 ## Setting up the API (Back End)
 - Clone the repository, then go to the newly created project root
   ```
